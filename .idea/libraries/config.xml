@@ -1,0 +1,11 @@
+<component name="libraryTable">
+  <library name="config">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/EXAMEN_SASTRE_DROCCHI_C7/EXAMENC7_SASTRE_DROCCHI/config/junit-4.10.jar!/" />
+      <root url="jar://$PROJECT_DIR$/EXAMEN_SASTRE_DROCCHI_C7/EXAMENC7_SASTRE_DROCCHI/config/log4j-1.2.17.jar!/" />
+      <root url="jar://$PROJECT_DIR$/EXAMEN_SASTRE_DROCCHI_C7/EXAMENC7_SASTRE_DROCCHI/config/h2-2.1.214.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>
