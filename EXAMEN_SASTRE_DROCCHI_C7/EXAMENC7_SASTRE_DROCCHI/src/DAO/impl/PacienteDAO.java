@@ -1,23 +1,24 @@
 package DAO.impl;
 
 import DAO.IDao;
-import Model.Odontologo;
+import Model.Paciente;
 import org.apache.log4j.Logger;
 
 import java.sql.*;
+import java.time.LocalDate;
 import java.util.ArrayList;
 
-public class OdontologoDAO implements IDao<Odontologo> {
-    private static final Logger logger = Logger.getLogger(OdontologoDAO.class);
+public class PacienteDAO implements IDao<Paciente> {
+    private static final Logger logger = Logger.getLogger(PacienteDAO.class);
 
     private final static String DB_JDBC_DRIVER = "org.h2.Driver";
     private final static String DB_URL = "jdbc:h2:~/test;INIT=RUNSCRIPT FROM 'EXAMENC7_SASTRE_DROCCHI/resource/create.sql'";
     private final static String DB_USER = "sa";
     private final static String DB_PASSWORD = "";
-    private final static String SQL_INSERT = "INSERT INTO ODONTOLOGOS(MATRICULA,NOMBRE,APELLIDO)" + "VALUES(?,?,?)";
-    private final static String SQL_BUSCAR_TODO = "SELECT * FROM ODONTOLOGOS";
-    private final static String SQL_UPDATE ="update ODONTOLOGOS set MATRICULA=?, NOMBRE=?, APELLIDO=? WHERE ID=?; ";
-    private final static String SQL_DELETE = "DELETE FROM ODONTOLOGOS WHERE ID = ?;";
+    private final static String SQL_INSERT = "INSERT INTO PACIENTES(NOMBRE,APELLIDO,DOMICILIO,DNI,FECHAALTA)" + "VALUES(?,?,?,?,?)";
+    private final static String SQL_BUSCAR_TODO = "SELECT * FROM PACIENTES";
+    private final static String SQL_UPDATE ="update PACIENTES set NOMBRE=?, APELLIDO=?, DOMICILIO=?, DNI=?, FECHAALTA=? WHERE ID=?; ";
+    private final static String SQL_DELETE = "DELETE FROM PACIENTES WHERE ID = ?;";
     public static Connection con() {
         Connection c = null;
         try {
@@ -30,22 +31,27 @@ public class OdontologoDAO implements IDao<Odontologo> {
     }
 
     @Override
-    public Odontologo guardar(Odontologo o) {
+    public Paciente guardar(Paciente paciente) {
         // Connection connection = null;
         //PreparedStatement preparedStatement = null;
         Connection connection = con();
         try {
             PreparedStatement ps = connection.prepareStatement(SQL_INSERT, Statement.RETURN_GENERATED_KEYS);
-            ps.setInt(1, o.getMatricula());
-            ps.setString(2, o.getNombre());
-            ps.setString(3, o.getApellido());
+
+            ps.setString(1, paciente.getNombre());
+            ps.setString(2, paciente.getApellido());
+            ps.setString(3, paciente.getDomicilio());
+            ps.setInt(4, paciente.getDNI());
+            LocalDate fechaAlta = paciente.getFechaAlta();
+            java.sql.Date fechaAltaSQL = java.sql.Date.valueOf(fechaAlta);
+            ps.setDate(5, fechaAltaSQL);
             ps.executeUpdate();
-            logger.debug("Se está guardando un odontologo en la base");
-            logger.debug("Se guardan los datos Matricula: " + o.getMatricula() + ", Nombre: " + o.getNombre() + ", Apellido: " + o.getApellido());
+            logger.debug("Se está guardando un paciente en la base");
+            logger.debug("Se guardan los datos Nombre: " + paciente.getNombre() + ", Apellido: " + paciente.getApellido() + ", Domicilio: " + paciente.getDomicilio() + ", DNI: " + paciente.getDNI() + ", Fecha de Alta: " + paciente.getFechaAlta());
 
             ResultSet keys = ps.getGeneratedKeys();
             while (keys.next()) {
-                o.setId(keys.getInt(1));
+                paciente.setId(keys.getInt(1));
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -56,15 +62,15 @@ public class OdontologoDAO implements IDao<Odontologo> {
                 ex.printStackTrace();
             }
         }
-        return o;
+        return paciente;
     }
 
     @Override
-    public ArrayList<Odontologo> listarTodos() {
-        logger.info("......Preparando el listado de odontologos.....");
+    public ArrayList<Paciente> listarTodos() {
+        logger.info("......Preparando el listado de pacientes.....");
         Connection connection = null;
         PreparedStatement preparedStatement = null;
-        ArrayList<Odontologo> odontologos = new ArrayList<>();
+        ArrayList<Paciente> pacientes = new ArrayList<>();
         try {
             //1 Levantar el driver y Conectarnos
             connection = con();
@@ -78,36 +84,43 @@ public class OdontologoDAO implements IDao<Odontologo> {
             //4 Obtener resultados
             while (result.next()) {
                 int id = result.getInt("id");
-                int matricula = result.getInt("matricula");
                 String nombre = result.getString("nombre");
                 String apellido = result.getString("apellido");
-                Odontologo odontologo = new Odontologo(id, matricula, nombre, apellido);
-                System.out.println(odontologo);
-                odontologos.add(odontologo);
+                String direccion = result.getString("direccion");
+                int dni = result.getInt("dni");
+                java.sql.Date fechaAltaSQL = result.getDate("fechaalta");
+                LocalDate fechaAlta = fechaAltaSQL.toLocalDate();
+
+                Paciente paciente = new Paciente(id, nombre, apellido,direccion,dni,fechaAlta);
+                System.out.println(paciente);
+                pacientes.add(paciente);
             }
-            logger.debug(odontologos);
+            logger.debug(pacientes);
             preparedStatement.close();
 
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return odontologos;
+        return pacientes;
     }
 
     @Override
-    public void modificar(Odontologo odontologo) {
+    public void modificar(Paciente paciente) {
         Connection connection = con();
         try {
-            PreparedStatement pst = connection.prepareStatement(SQL_UPDATE);
-            pst.setInt(1, odontologo.getMatricula());
-            pst.setString(2, odontologo.getNombre());
-            pst.setString(3, odontologo.getApellido());
-            pst.setInt(4, odontologo.getId());
-            pst.executeUpdate();
+            PreparedStatement ps = connection.prepareStatement(SQL_UPDATE);
+            ps.setString(1, paciente.getNombre());
+            ps.setString(2, paciente.getApellido());
+            ps.setString(3, paciente.getDomicilio());
+            ps.setInt(4, paciente.getDNI());
+            LocalDate fechaAlta = paciente.getFechaAlta();
+            java.sql.Date fechaAltaSQL = java.sql.Date.valueOf(fechaAlta);
+            ps.setDate(5, fechaAltaSQL);
+            ps.executeUpdate();
 
-            ResultSet keys = pst.getGeneratedKeys();
+            ResultSet keys = ps.getGeneratedKeys();
             while (keys.next()) {
-                odontologo.setId(keys.getInt(1));
+                paciente.setId(keys.getInt(1));
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -139,5 +152,4 @@ public class OdontologoDAO implements IDao<Odontologo> {
             }
         };
     }
-
 }
