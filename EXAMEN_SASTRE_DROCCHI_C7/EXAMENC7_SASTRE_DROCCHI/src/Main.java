@@ -32,9 +32,13 @@ public class Main {
         //os.buscarTodos();
         Paciente p = new Paciente("Esteban","Camejo","Treinta y Tres 123",44444444, LocalDate.of(2021,01,01));
         PacienteService pservice = new PacienteService(new PacienteDAO());
-
+        pservice.buscarTodos();
         pservice.guardar(p);
-
+        Paciente p2 = new Paciente(1,"Gustavo","Santos","Av. Burgos 123", 22222222,LocalDate.of(2022,02,02));
+        pservice.modificar(p2);
+        pservice.buscarTodos();
+        pservice.eliminar(2);
+        pservice.buscarTodos();
 
 
     }

@@ -86,12 +86,12 @@ public class PacienteDAO implements IDao<Paciente> {
                 int id = result.getInt("id");
                 String nombre = result.getString("nombre");
                 String apellido = result.getString("apellido");
-                String direccion = result.getString("direccion");
+                String domicilio = result.getString("domicilio");
                 int dni = result.getInt("dni");
                 java.sql.Date fechaAltaSQL = result.getDate("fechaalta");
                 LocalDate fechaAlta = fechaAltaSQL.toLocalDate();
 
-                Paciente paciente = new Paciente(id, nombre, apellido,direccion,dni,fechaAlta);
+                Paciente paciente = new Paciente(id, nombre, apellido,domicilio,dni,fechaAlta);
                 System.out.println(paciente);
                 pacientes.add(paciente);
             }
@@ -116,6 +116,7 @@ public class PacienteDAO implements IDao<Paciente> {
             LocalDate fechaAlta = paciente.getFechaAlta();
             java.sql.Date fechaAltaSQL = java.sql.Date.valueOf(fechaAlta);
             ps.setDate(5, fechaAltaSQL);
+            ps.setInt(6, paciente.getId());  // Agregar este código para establecer el valor del parámetro ID
             ps.executeUpdate();
 
             ResultSet keys = ps.getGeneratedKeys();

@@ -2,16 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="e5aebedf-6b07-4a13-aa1a-347f81f98626" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/EXAMENC7_SASTRE_DROCCHI/src/DAO/impl/PacienteDAO.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/EXAMENC7_SASTRE_DROCCHI/src/Model/Paciente.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/EXAMENC7_SASTRE_DROCCHI/src/Service/PacienteService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/EXAMENC7_SASTRE_DROCCHI/resource/create.sql" beforeDir="false" afterPath="$PROJECT_DIR$/EXAMENC7_SASTRE_DROCCHI/resource/create.sql" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/EXAMENC7_SASTRE_DROCCHI/src/DAO/impl/OdontologoDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/EXAMENC7_SASTRE_DROCCHI/src/DAO/impl/OdontologoDAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/EXAMENC7_SASTRE_DROCCHI/src/DAO/impl/PacienteDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/EXAMENC7_SASTRE_DROCCHI/src/DAO/impl/PacienteDAO.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/EXAMENC7_SASTRE_DROCCHI/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/EXAMENC7_SASTRE_DROCCHI/src/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/avisos.log" beforeDir="false" afterPath="$PROJECT_DIR$/avisos.log" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/EXAMEN_SASTRE_DROCCHI_C7/DAO/impl/OdontologoDAO.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/EXAMEN_SASTRE_DROCCHI_C7/DAO/impl/OdontologoDAO.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/EXAMEN_SASTRE_DROCCHI_C7/DAO/impl/PacienteDAO.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/EXAMEN_SASTRE_DROCCHI_C7/DAO/impl/PacienteDAO.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/EXAMEN_SASTRE_DROCCHI_C7/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/EXAMEN_SASTRE_DROCCHI_C7/Main.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -90,16 +84,5 @@
         </entry>
       </map>
     </option>
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/EXAMENC7_SASTRE_DROCCHI/src/DAO/impl/OdontologoDAO.java</url>
-          <line>38</line>
-          <option name="timeStamp" value="1" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
   </component>
 </project>
